@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+        [opened]="!(isHandset | async)!.matches">
+        <mat-toolbar color="primary"></mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/dashboard">Nastenka</a>
+            <a mat-list-item routerLink="/personnel">Seznam Personalu</a>
+            <a mat-list-item routerLink="/patients">Seznam Pacientu</a>
+            <a mat-list-item routerLink="/diseases">Seznam Nemoci</a>
+            <a mat-list-item routerLink="/drugs">Seznam Leku</a>
+        </mat-nav-list>
+        <ng-container *ngIf="isUserAuthenticated()">
+            <button class='add-button pulse' mat-mini-fab color="accent" [matMenuTriggerFor]="addBeerMenu">+</button>
+            <mat-menu #addBeerMenu="matMenu" yPosition="below" xPosition="after" [overlapTrigger]="false" class="add-beer-menu">
+                <app-nav-personnel-add-card (closeMenu)="closeBeerMenu()"></app-nav-personnel-add-card>
+            </mat-menu>
+        </ng-container>
+        <div class="bottom-content" id="botNav" mat-list-item>
+            <mat-list dense>
+                <mat-list-item>
+                    <a target="_blank" href="/privacy-policy">Privacy Policy</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a target="_blank" href="/terms">Terms and Conditions</a>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="(isHandset | async)!.matches">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span class='title'>Nemocnice Květoslava Márádsaláma</span>
+            <span class="fill-remaining-space"></span>
+            <app-nav-user-card></app-nav-user-card>
+        </mat-toolbar>
+        <app-nav-notification-bar></app-nav-notification-bar>
+        <app-nav-loading-bar></app-nav-loading-bar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

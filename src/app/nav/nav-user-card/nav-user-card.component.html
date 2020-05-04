@@ -1,0 +1,13 @@
+<mat-card *ngIf="isUserAuthenticated(); else showLogin" class='login-card' [matMenuTriggerFor]="appMenu">
+    <mat-card-header>
+        <img mat-card-avatar [src]="getUser().photoURL" />
+        <mat-card-title [hidden]="!shouldShowCardText()">{{ getUser().displayName }}</mat-card-title>
+        <mat-card-subtitle [hidden]="!shouldShowCardText()">{{ getUser().email }} </mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
+<mat-menu #appMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
+    <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
+<ng-template #showLogin>
+    <button mat-raised-button color="accent" (click)="login()">Sign In</button>
+</ng-template>

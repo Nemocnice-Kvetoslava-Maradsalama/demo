@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+/* Application-wide Styles */
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+}
+h2, h3 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+}
+body {
+    margin: 2   em;
+}
+body, input[text], button {
+    color: #888;
+    font-family: Cambria, Georgia;
+}
+/* everywhere else */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+body { margin: 0; }
+
+.add-beer-menu .mat-menu-content {
+    padding: 0px;
+}
+
+.add-beer-menu .mat-card-header-text {
+    margin: 0px;
+}
+
+.chat-menu {
+    position: fixed;
+    z-index: 1;
+}
+
+@media (max-width: 460px) {
+    .chat-menu {
+        left: 0px;
+        right: 0px;
+        top: 0px;
+    }
+    .mat-menu-panel.chat-menu {
+        max-width: inherit !important;
+    }
+}
+
+@media (min-width: 461px) {
+    .chat-menu {
+        right: 100px;
+        bottom: 100px;
+        width: 350px;
+        max-width: 350px !important;
+    }
+}
+
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+
+ngb-rating .ng-star-inserted {
+    color: orange;
+    font-size: 23px;
+}
