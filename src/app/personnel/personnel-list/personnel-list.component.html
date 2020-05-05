@@ -1,22 +1,50 @@
-<div class="mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="firstname">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.firstname}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="lastname">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.lastname}}%</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="salary">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Salary</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.salary}}°</mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/detail/{{row.id}}"></mat-row>
-    </mat-table>
-</div>
+<mat-tab-group>
+    <mat-tab label="Doktori">
+        <div class="mat-elevation-z8">
+            <mat-table #table [dataSource]="doctorsDataSource" matSort aria-label="Elements">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="firstname">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.firstname}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="lastname">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.lastname}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="salary">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Salary</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.salary}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="totalSalary">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Total Salary</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{salaries[row.id]}}<button *ngIf="!salaries[row.id]" (click)="calculateSalary(row.id)">Calculate</button></mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="doctorsDisplayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: doctorsDisplayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-tab>
+    <mat-tab label="Ucty">
+        <div class="mat-elevation-z8">
+            <mat-table #table [dataSource]="accountsDataSource" matSort aria-label="Elements">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="username">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.username}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.username}}</mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="accountsDisplayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: accountsDisplayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-tab>
+</mat-tab-group>

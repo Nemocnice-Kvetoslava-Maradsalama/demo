@@ -4,7 +4,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Account, Doctor } from 'src/app/types';
+import { Patient, Disease, Symptom } from 'src/app/types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -18,12 +18,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnelService {
-  private url: string = environment.serviceUrls.personnel;
+export class DiseaseService {
+  private url: string = environment.serviceUrls.disease;
 
   constructor(private http: HttpClient) { }
 
-  public addDoctor(doctor: Doctor): Observable<Doctor> {
+  /*public addDoctor(doctor: Doctor): Observable<Doctor> {
     return this.http.post<Doctor>(this.url + '/doctors', doctor, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -35,24 +35,17 @@ export class PersonnelService {
       .pipe(
         catchError(this.handleError)
       );
-  }
+  }*/
 
-  public getAccounts(): Observable<Account | Account[]> {
-    return this.http.get<Account>(this.url + '/accounts', httpOptions)
+  public getDiseases(): Observable<Disease | Disease[]> {
+    return this.http.get<Disease>(this.url + '/disease/', httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  public login (username: string, password: string): Observable<any> {
-    return this.http.post<Doctor>(this.url + '/auth/login', { username, password }, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  public calculateSalary (doctorId: number): Observable<number> {
-    return this.http.get<number>(this.url + '/salary/' + doctorId, httpOptions)
+  public getSymptoms(): Observable<Symptom | Symptom[]> {
+    return this.http.get<Symptom>(this.url + '/symptom/', httpOptions)
       .pipe(
         catchError(this.handleError)
       );

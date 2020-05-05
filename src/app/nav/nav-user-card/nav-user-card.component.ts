@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MediaObserver } from '@angular/flex-layout';
 import { AuthService } from '../../auth.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { AuthService } from '../../auth.service';
 })
 export class NavUserCardComponent {
 
-    constructor (private authService: AuthService, private mediaObserver: MediaObserver) {}
+    constructor (private authService: AuthService) {}
 
     public isUserAuthenticated () {
         return this.authService.isAuthenticated();
@@ -23,12 +22,7 @@ export class NavUserCardComponent {
         this.authService.logout();
     }
 
-    public getUser (): any {
-        return this.authService.getUser();
+    public getUsername (): any {
+        return this.authService.getUsername();
     }
-
-    public shouldShowCardText () {
-        return !this.mediaObserver.isActive('xs');
-    }
-
 }

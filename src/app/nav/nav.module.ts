@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { NavLoadingBarComponent } from './nav-loading-bar/nav-loading-bar.component';
@@ -22,9 +23,10 @@ import { NavUserCardComponent } from './nav-user-card/nav-user-card.component';
 
 import { NavComponent } from './nav/nav.component';
 import { NavPersonnelAddCardComponent } from './nav-personnel-add-card/nav-personnel-add-card.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @NgModule({
-  declarations: [NavComponent, NavLoadingBarComponent, NavNotificationBarComponent, NavUserCardComponent, NavPersonnelAddCardComponent],
+  declarations: [NavComponent, NavLoadingBarComponent, NavNotificationBarComponent, NavUserCardComponent, NavPersonnelAddCardComponent, LoginDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -40,8 +42,10 @@ import { NavPersonnelAddCardComponent } from './nav-personnel-add-card/nav-perso
     MatListModule,
     MatIconModule,
     MatInputModule,
+    MatDialogModule,
     AppRoutingModule,
   ],
+  entryComponents: [LoginDialogComponent],
   exports: [NavComponent]
 })
 export class NavModule { }

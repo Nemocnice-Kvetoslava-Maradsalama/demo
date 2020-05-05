@@ -6,7 +6,7 @@ import { PersonnelService } from 'src/app/personnel.service';
 import { LoadingService } from '../../loading.service';
 import { Doctor } from 'src/app/types';
 
-export class PersonnelListDataSource extends DataSource<Doctor> {
+export class DoctorListDataSource extends DataSource<Doctor> {
 
     private unsetLoading: () => void;
 
@@ -24,9 +24,9 @@ export class PersonnelListDataSource extends DataSource<Doctor> {
                 this.unsetLoading = this.loadingService.setLoading();
                 return this.personnelService.getDoctors();
             }),
-            map((beers: Doctor[]) => {
+            map((items: Doctor[]) => {
                 this.unsetLoading();
-                return this.getSortedData(beers);
+                return this.getSortedData(items);
             })
         );
     }

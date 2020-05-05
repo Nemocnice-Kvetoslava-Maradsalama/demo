@@ -3,18 +3,21 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NavModule } from './nav/nav.module';
-import { PersonnelModule } from './personnel/personnel.module';
 
 import { AppComponent } from './app.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { PatientModule } from './patient/patient.module';
+import { PersonnelModule } from './personnel/personnel.module';
+import { DiseaseModule } from './disease/disease.module';
+import { DrugModule } from './drug/drug.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +26,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     DashboardModule,
     PersonnelModule,
+    PatientModule,
+    DiseaseModule,
+    DrugModule,
     NavModule,
     FlexLayoutModule,
     NgbModule,

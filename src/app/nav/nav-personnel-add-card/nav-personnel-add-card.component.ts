@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { PersonnelService } from '../../personnel.service';
-//import { BeerBase } from '../../app.types';
 
 @Component({
   selector: 'app-nav-personnel-add-card',
@@ -11,15 +10,15 @@ import { PersonnelService } from '../../personnel.service';
 export class NavPersonnelAddCardComponent implements OnInit {
     @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
     public isLoading = false;
-    public beer: any;//BeerBase;
+    public item: any;
 
     constructor (private router: Router, private personnelService: PersonnelService) {}
 
     ngOnInit () {
-        this.resetBeer();
+        this.resetItem();
     }
-    private resetBeer (): void {
-        this.beer = {
+    private resetItem (): void {
+        this.item = {
             id: '',
             name: ''
         };
@@ -31,14 +30,14 @@ export class NavPersonnelAddCardComponent implements OnInit {
 
     public submit () {
         this.isLoading = true;
-        this.personnelService.addDoctor(this.beer).subscribe((beerId) => {
-            this.navigateToBeerEditPage(beerId);
-            this.resetBeer();
+        this.personnelService.addDoctor(this.item).subscribe((itemId) => {
+            this.navigateToItemEditPage(itemId);
+            this.resetItem();
             this.closeMenu.emit();
             this.isLoading = false;
         })
     }
-    private navigateToBeerEditPage (beerId) {
-        this.router.navigate(['/edit/' + beerId]);
+    private navigateToItemEditPage (itemId) {
+        this.router.navigate(['/edit/' + itemId]);
     }
 }

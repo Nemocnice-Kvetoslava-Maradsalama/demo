@@ -4,7 +4,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Account, Doctor } from 'src/app/types';
+import { Patient, Drug } from 'src/app/types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -18,12 +18,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnelService {
-  private url: string = environment.serviceUrls.personnel;
+export class DrugService {
+  private url: string = environment.serviceUrls.drugs;
 
   constructor(private http: HttpClient) { }
 
-  public addDoctor(doctor: Doctor): Observable<Doctor> {
+  /*public addDoctor(doctor: Doctor): Observable<Doctor> {
     return this.http.post<Doctor>(this.url + '/doctors', doctor, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -35,24 +35,10 @@ export class PersonnelService {
       .pipe(
         catchError(this.handleError)
       );
-  }
+  }*/
 
-  public getAccounts(): Observable<Account | Account[]> {
-    return this.http.get<Account>(this.url + '/accounts', httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  public login (username: string, password: string): Observable<any> {
-    return this.http.post<Doctor>(this.url + '/auth/login', { username, password }, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  public calculateSalary (doctorId: number): Observable<number> {
-    return this.http.get<number>(this.url + '/salary/' + doctorId, httpOptions)
+  public getDrugs(): Observable<Drug | Drug[]> {
+    return this.http.get<Drug>(this.url + '/drug', httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -67,7 +53,7 @@ export class PersonnelService {
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: ${error.error.message}`);
     }
     // return an observable with a user-facing error message
     return throwError(

@@ -15,7 +15,7 @@ export class NavComponent {
 
     constructor (private breakpointObserver: BreakpointObserver, private authService: AuthService) {}
 
-    closeBeerMenu () {
+    closeItemMenu () {
         this.trigger.closeMenu();
     }
 
