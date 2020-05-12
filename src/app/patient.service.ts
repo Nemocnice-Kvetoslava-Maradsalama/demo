@@ -4,7 +4,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Patient } from 'src/app/types';
+import { Patient, Interaction } from 'src/app/types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -43,6 +43,13 @@ export class PatientService {
 
   public getPatients(): Observable<Patient | Patient[]> {
     return this.http.get<Patient>(this.url + '/patient/list', this.getHttpOptions())
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public getInteractions (patientId: number): Observable<Interaction | Interaction[]> {
+    return this.http.get<Interaction>(this.url + '/patient/' + patientId + '/interactions', this.getHttpOptions())
       .pipe(
         catchError(this.handleError)
       );

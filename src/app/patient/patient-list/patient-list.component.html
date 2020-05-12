@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="!patientIdForInteractions">
     <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
@@ -24,7 +24,12 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Note</mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.note}}</mat-cell>
         </ng-container>
+        <ng-container matColumnDef="interactions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Interactions</mat-header-cell>
+            <mat-cell *matCellDef="let row"><button (click)="patientIdForInteractions = row.id">Show</button></mat-cell>
+        </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 </div>
+<app-interaction-list *ngIf="patientIdForInteractions" [patientId]="patientIdForInteractions"></app-interaction-list>

@@ -47,3 +47,12 @@ export interface Drug {
     available: boolean;
     amount: string;
 }
+
+export interface Interaction {
+    diagnosis: number[];
+    doctor: number;
+    id: number;
+    note: string;
+    prescriptions: string[];
+    symptoms: number[];
+}

@@ -1,0 +1,30 @@
+<div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="diagnosis">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Diagnosis</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.diagnosis}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="doctor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.doctor}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="prescriptions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Prescriptions</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.prescriptions}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="symptoms">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Symptoms</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.symptoms}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="note">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Note</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.note}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

@@ -12,7 +12,8 @@ import { PatientService } from 'src/app/patient.service';
 export class PatientListComponent implements AfterViewInit {
     @ViewChild(MatSort) sort: MatSort;
     dataSource: PatientListDataSource;
-    displayedColumns = ['id', 'firstName', 'lastName', 'address', 'note', 'personalNumber'];
+    patientIdForInteractions: number = null;
+    displayedColumns = ['id', 'firstName', 'lastName', 'address', 'note', 'personalNumber', 'interactions'];
 
     constructor (private patientService: PatientService, private loadingService: LoadingService) {}
 
