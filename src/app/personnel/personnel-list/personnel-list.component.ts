@@ -4,6 +4,8 @@ import { DoctorListDataSource } from './doctor-list-datasource';
 import { AccountListDataSource } from './account-list-datasource';
 import { PersonnelService } from '../../personnel.service';
 import { LoadingService } from '../../loading.service';
+import { AuthService } from 'src/app/auth.service';
+import { SalaryService } from 'src/app/salary.service';
 
 @Component({
     selector: 'app-personnel-list',
@@ -18,7 +20,7 @@ export class PersonnelListComponent implements AfterViewInit {
     accountsDisplayedColumns = ['id', 'username', 'email'];
     salaries: number[] = [];
 
-    constructor (private personnelService: PersonnelService, private loadingService: LoadingService) {}
+    constructor (private personnelService: PersonnelService, private loadingService: LoadingService, private authService: AuthService, private salaryService: SalaryService) {}
 
     ngAfterViewInit () {
         setTimeout(() => {
@@ -28,8 +30,12 @@ export class PersonnelListComponent implements AfterViewInit {
     }
 
     public calculateSalary (doctorId: number) {
-        this.personnelService.calculateSalary(doctorId).subscribe((salary) => {
+        this.salaryService.calculateSalary(doctorId).subscribe((salary) => {
             this.salaries[doctorId] = salary;
         });
+    }
+
+    public canCalculateSalary (doctorId: number) {
+        return !this.salaries[doctorId] && this.authService.isAuthenticated();
     }
 }

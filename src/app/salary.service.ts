@@ -3,48 +3,32 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Account, Doctor } from 'src/app/types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-};
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnelService {
+export class SalaryService {
   private url: string = environment.serviceUrls.personnel;
 
-  constructor(private http: HttpClient) { }
+  constructor (private http: HttpClient, private authService: AuthService) { }
 
-  public addDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.post<Doctor>(this.url + '/doctors', doctor, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+  private getHttpOptions () {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken()
+      })
+    };
   }
 
-  public getDoctors(): Observable<Doctor | Doctor[]> {
-    return this.http.get<Doctor>(this.url + '/doctors', httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  public getAccounts(): Observable<Account | Account[]> {
-    return this.http.get<Account>(this.url + '/accounts', httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  public login (username: string, password: string): Observable<any> {
-    return this.http.post<Doctor>(this.url + '/auth/login', { username, password }, httpOptions)
+  public calculateSalary (doctorId: number): Observable<number> {
+    console.log('calling: ' + this.url + '/salary/' + doctorId);
+    return this.http.get<number>(this.url + '/salary/' + doctorId, this.getHttpOptions())
       .pipe(
         catchError(this.handleError)
       );
