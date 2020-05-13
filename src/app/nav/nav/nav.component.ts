@@ -10,14 +10,9 @@ import { AuthService } from '../../auth.service';
     styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-    @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
     isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
 
     constructor (private breakpointObserver: BreakpointObserver, private authService: AuthService) {}
-
-    closeItemMenu () {
-        this.trigger.closeMenu();
-    }
 
     public isUserAuthenticated (): boolean {
         return this.authService.isAuthenticated();

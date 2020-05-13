@@ -51,8 +51,14 @@ export interface Drug {
 export interface Interaction {
     diagnosis: number[];
     doctor: number;
-    id: number;
+    id?: number;
     note: string;
     prescriptions: string[];
     symptoms: number[];
+}
+
+export interface InteractionWithPatient extends Interaction {
+    patient: {
+        id: number;
+    }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import { LoadingService } from '../../loading.service';
+import { LoadingService } from '../../loading.service';
 
 @Component({
     selector: 'app-nav-loading-bar',
@@ -8,10 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NavLoadingBarComponent {
 
-    //constructor (private loadingService: LoadingService) {}
+    constructor (private loadingService: LoadingService) {}
 
     public shouldShowLoading (): boolean {
-      return false;
-        //return this.loadingService.shouldShowLoading();
+        return this.loadingService.shouldShowLoading();
     }
 }

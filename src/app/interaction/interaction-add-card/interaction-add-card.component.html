@@ -1,0 +1,20 @@
+<mat-card (click)="stopPropagation($event)">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-header>
+        <mat-card-title>Add new interaction</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Doctor" [(ngModel)]="item.doctor" name="doctor" (keyup.enter)="submit()">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Note" [(ngModel)]="item.note" name="note" (keyup.enter)="submit()">
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-button color="primary" (click)="submit()">Save & Open</button>
+    </mat-card-actions>
+</mat-card>

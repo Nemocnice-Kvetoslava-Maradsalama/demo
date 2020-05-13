@@ -9,12 +9,6 @@
             <a mat-list-item routerLink="/diseases">Seznam Nemoci</a>
             <a mat-list-item routerLink="/drugs">Seznam Leku</a>
         </mat-nav-list>
-        <ng-container *ngIf="isUserAuthenticated()">
-            <button class='add-button pulse' mat-mini-fab color="accent" [matMenuTriggerFor]="addItemMenu">+</button>
-            <mat-menu #addItemMenu="matMenu" yPosition="below" xPosition="after" [overlapTrigger]="false" class="add-item-menu">
-                <app-nav-personnel-add-card (closeMenu)="closeItemMenu()"></app-nav-personnel-add-card>
-            </mat-menu>
-        </ng-container>
         <div class="bottom-content" id="botNav" mat-list-item>
             <mat-list dense>
                 <mat-list-item>

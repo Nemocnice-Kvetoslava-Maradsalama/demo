@@ -1,3 +1,9 @@
+<ng-container *ngIf="isUserAuthenticated()">
+    <button class='add-button pulse' mat-mini-fab [matMenuTriggerFor]="addItemMenu">+</button>
+    <mat-menu #addItemMenu="matMenu" yPosition="below" xPosition="after" [overlapTrigger]="false" class="add-item-menu">
+        <app-interaction-add-card [patientId]="patientId" (closeMenu)="closeItemMenu()"></app-interaction-add-card>
+    </mat-menu>
+</ng-container>
 <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
         <ng-container matColumnDef="id">

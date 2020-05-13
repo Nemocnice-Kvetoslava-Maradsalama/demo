@@ -22,11 +22,10 @@ import { NavNotificationBarComponent } from './nav-notification-bar/nav-notifica
 import { NavUserCardComponent } from './nav-user-card/nav-user-card.component';
 
 import { NavComponent } from './nav/nav.component';
-import { NavPersonnelAddCardComponent } from './nav-personnel-add-card/nav-personnel-add-card.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @NgModule({
-  declarations: [NavComponent, NavLoadingBarComponent, NavNotificationBarComponent, NavUserCardComponent, NavPersonnelAddCardComponent, LoginDialogComponent],
+  declarations: [NavComponent, NavLoadingBarComponent, NavNotificationBarComponent, NavUserCardComponent, LoginDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
