@@ -5,6 +5,7 @@ import { LoadingService } from '../../loading.service';
 import { PatientService } from 'src/app/patient.service';
 import { AuthService } from 'src/app/auth.service';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { ForeignMappingService } from 'src/app/foreign-mapping.service';
 
 @Component({
   selector: 'app-interaction-list',
@@ -18,7 +19,7 @@ export class InteractionListComponent implements AfterViewInit {
     dataSource: InteractionListDataSource;
     displayedColumns = ['id', 'diagnosis', 'doctor', 'prescriptions', 'symptoms', 'note'];
 
-    constructor (private patientService: PatientService, private loadingService: LoadingService, private authService: AuthService) {}
+    constructor (private patientService: PatientService, private loadingService: LoadingService, private authService: AuthService, private foreignMappingService: ForeignMappingService) {}
 
     ngAfterViewInit () {
         setTimeout(() => {
@@ -32,5 +33,21 @@ export class InteractionListComponent implements AfterViewInit {
     public closeItemMenu () {
         this.trigger.closeMenu();
         this.dataSource = new InteractionListDataSource(this.patientId, this.sort, this.patientService, this.loadingService);
+    }
+
+    public getDoctorById (doctorId: number): string {
+        return this.foreignMappingService.getDoctorById(doctorId);
+    }
+
+    public getForeignSymptoms (symptoms: number[]) {
+        return symptoms.map((symptomId) => this.foreignMappingService.getSymptomById(symptomId)).join(', ');
+    }
+
+    public getForeignDrugs (prescriptions: number[]) {
+        return prescriptions.map((prescriptionId) => this.foreignMappingService.getDrugById(prescriptionId)).join(', ');
+    }
+
+    public getForeignDiseases (diseases: number[]) {
+        return diseases.map((diseaseId) => this.foreignMappingService.getDiseaseById(diseaseId)).join(', ');
     }
 }

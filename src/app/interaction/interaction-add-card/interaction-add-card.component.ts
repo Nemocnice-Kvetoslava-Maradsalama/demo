@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { InteractionWithPatient } from 'src/app/types';
 import { PatientService } from 'src/app/patient.service';
+import { ForeignMappingService } from 'src/app/foreign-mapping.service';
 
 @Component({
   selector: 'app-interaction-add-card',
@@ -13,7 +14,7 @@ export class InteractionAddCardComponent implements OnInit {
     public isLoading = false;
     public item: InteractionWithPatient;
 
-    constructor (private patientService: PatientService) {}
+    constructor (private patientService: PatientService, private foreignMappingService: ForeignMappingService) {}
 
     ngOnInit () {
         this.resetItem();
@@ -22,13 +23,26 @@ export class InteractionAddCardComponent implements OnInit {
         this.item = {
             doctor: 0,
             note: '',
-            diagnosis: [],
-            prescriptions: [],
-            symptoms: [],
+            diagnosis: undefined,
+            prescriptions: undefined,
+            symptoms: undefined,
             patient: {
                 id: this.patientId
             }
         };
+    }
+
+    public getDrugs () {
+        return this.foreignMappingService.getDrugsAsArray();
+    }
+    public getDiseases () {
+        return this.foreignMappingService.getDiseases();
+    }
+    public getSymptoms () {
+        return this.foreignMappingService.getSymptoms();
+    }
+    public getDoctors () {
+        return this.foreignMappingService.getDoctors();
     }
 
     public stopPropagation (event): void {
@@ -37,10 +51,16 @@ export class InteractionAddCardComponent implements OnInit {
 
     public submit () {
         this.isLoading = true;
+        console.log(this.item);
         this.patientService.addInteraction(this.item).subscribe((itemId) => {
             this.resetItem();
             this.closeMenu.emit();
             this.isLoading = false;
+        }, (error) => {
+            this.isLoading = false;
+            this.resetItem();
+            this.closeMenu.emit();
+            console.error(error);
         })
     }
-}
+};

@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select'; 
 
 @NgModule({
   declarations: [InteractionListComponent, InteractionAddCardComponent],
@@ -35,6 +36,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule
   ],
   entryComponents: [InteractionListComponent],
   exports: [InteractionListComponent]

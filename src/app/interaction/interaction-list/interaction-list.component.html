@@ -12,19 +12,19 @@
         </ng-container>
         <ng-container matColumnDef="diagnosis">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Diagnosis</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.diagnosis}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{getForeignDiseases(row.diagnosis)}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="doctor">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.doctor}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{getDoctorById(row.doctor)}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="prescriptions">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Prescriptions</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.prescriptions}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{getForeignDrugs(row.prescriptions)}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="symptoms">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Symptoms</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.symptoms}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{getForeignSymptoms(row.symptoms)}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="note">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Note</mat-header-cell>
