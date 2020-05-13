@@ -24,7 +24,16 @@
                 </ng-container>
                 <ng-container matColumnDef="cures">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Cures</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.cures}}</mat-cell>
+                    <mat-cell *matCellDef="let row">{{getCures(row.cures)}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="addCure">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-stroked-button color="primary" [matMenuTriggerFor]="addItemMenu">Add Cure</button>
+                        <mat-menu #addItemMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false" class="add-item-menu">
+                            <app-disease-add-cure [diseaseId]="row.id" (closeMenu)="closeItemMenu()"></app-disease-add-cure>
+                        </mat-menu>
+                    </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="diseaseDisplayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: diseaseDisplayedColumns;"></mat-row>

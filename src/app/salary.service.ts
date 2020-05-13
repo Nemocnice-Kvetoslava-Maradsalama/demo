@@ -27,7 +27,6 @@ export class SalaryService {
   }
 
   public calculateSalary (doctorId: number): Observable<number> {
-    console.log('calling: ' + this.url + '/salary/' + doctorId);
     return this.http.get<number>(this.url + '/salary/' + doctorId, this.getHttpOptions())
       .pipe(
         catchError(this.handleError)

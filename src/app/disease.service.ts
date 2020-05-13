@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, combineLatest, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, filter } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Patient, Disease, Symptom } from 'src/app/types';
+import { Patient, Disease, Symptom, Drug, CureForDisease } from 'src/app/types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-};
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,31 +16,39 @@ const httpOptions = {
 export class DiseaseService {
   private url: string = environment.serviceUrls.disease;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  /*public addDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.post<Doctor>(this.url + '/doctors', doctor, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+  private getHttpOptions () {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + this.authService.getToken()
+      })
+    };
   }
 
-  public getDoctors(): Observable<Doctor | Doctor[]> {
-    return this.http.get<Doctor>(this.url + '/doctors', httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }*/
-
   public getDiseases(): Observable<Disease | Disease[]> {
-    return this.http.get<Disease>(this.url + '/disease/', httpOptions)
+    return this.http.get<Disease[]>(this.url + '/disease/', this.getHttpOptions())
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
+        map((diseases: Disease[]) => {
+          return diseases.filter((disease: Disease) => !!disease.id);
+        })
       );
   }
 
   public getSymptoms(): Observable<Symptom | Symptom[]> {
-    return this.http.get<Symptom>(this.url + '/symptom/', httpOptions)
+    return this.http.get<Symptom[]>(this.url + '/symptom/', this.getHttpOptions())
+      .pipe(
+        catchError(this.handleError),
+        map((symptoms: Symptom[]) => {
+          return symptoms.filter((symptom: Symptom) => !!symptom.id);
+        })
+      );
+  }
+
+  public addCure (cure: CureForDisease) {
+    return this.http.post<CureForDisease>(this.url + '/disease/addCure/', cure, this.getHttpOptions())
       .pipe(
         catchError(this.handleError)
       );

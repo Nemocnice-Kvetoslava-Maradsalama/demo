@@ -20,7 +20,9 @@
                 </ng-container>
                 <ng-container matColumnDef="totalSalary">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Total Salary</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{salaries[row.id]}}<button *ngIf="canCalculateSalary(row.id)" (click)="calculateSalary(row.id)">Calculate</button></mat-cell>
+                    <mat-cell *matCellDef="let row">{{salaries[row.id]}}
+                        <button mat-stroked-button color="primary"  *ngIf="canCalculateSalary(row.id)" (click)="calculateSalary(row.id)">Calculate</button>
+                    </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="doctorsDisplayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: doctorsDisplayedColumns;"></mat-row>

@@ -51,7 +51,6 @@ export class InteractionAddCardComponent implements OnInit {
 
     public submit () {
         this.isLoading = true;
-        console.log(this.item);
         this.patientService.addInteraction(this.item).subscribe((itemId) => {
             this.resetItem();
             this.closeMenu.emit();

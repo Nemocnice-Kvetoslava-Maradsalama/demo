@@ -27,20 +27,6 @@ export class PatientService {
     };
   }
 
-  /*public addDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.post<Doctor>(this.url + '/doctors', doctor, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  public getDoctors(): Observable<Doctor | Doctor[]> {
-    return this.http.get<Doctor>(this.url + '/doctors', httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }*/
-
   public getPatients(): Observable<Patient | Patient[]> {
     return this.http.get<Patient>(this.url + '/patient/list', this.getHttpOptions())
       .pipe(

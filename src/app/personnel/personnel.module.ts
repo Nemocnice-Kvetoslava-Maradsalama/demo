@@ -6,6 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PersonnelListComponent } from './personnel-list/personnel-list.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [PersonnelListComponent],
@@ -14,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatTabsModule,
     MatSortModule,
+    MatButtonModule,
     HttpClientModule,
     AppRoutingModule
   ]

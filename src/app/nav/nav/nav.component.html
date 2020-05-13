@@ -6,8 +6,8 @@
             <a mat-list-item routerLink="/dashboard">Nastenka</a>
             <a mat-list-item routerLink="/personnel">Seznam Personalu</a>
             <a mat-list-item *ngIf="isUserAuthenticated()" routerLink="/patients">Seznam Pacientu</a>
-            <a mat-list-item routerLink="/diseases">Seznam Nemoci</a>
-            <a mat-list-item routerLink="/drugs">Seznam Leku</a>
+            <a mat-list-item *ngIf="isUserAuthenticated()" routerLink="/diseases">Seznam Nemoci</a>
+            <a mat-list-item *ngIf="isUserAuthenticated()" routerLink="/drugs">Seznam Leku</a>
         </mat-nav-list>
         <div class="bottom-content" id="botNav" mat-list-item>
             <mat-list dense>

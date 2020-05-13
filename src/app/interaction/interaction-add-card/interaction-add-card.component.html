@@ -8,9 +8,11 @@
             <mat-form-field>
                 <mat-label>Doctor</mat-label>
                 <mat-select [(ngModel)]="item.doctor" name="doctor">
-                    <mat-option *ngFor="let doctor of getDoctors(); index as i;" [value]="i">
-                        {{doctor}}
-                    </mat-option>
+                    <ng-container *ngFor="let doctor of getDoctors(); index as i;" >
+                        <mat-option *ngIf="doctor" [value]="i">
+                            {{doctor}}
+                        </mat-option>
+                    </ng-container>
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width">
@@ -19,17 +21,21 @@
             <mat-form-field>
                 <mat-label>Symptoms</mat-label>
                 <mat-select [(ngModel)]="item.symptoms" name="symptoms" multiple>
-                    <mat-option *ngFor="let symptom of getSymptoms(); index as i;" [value]="i">
-                        {{symptom}}
-                    </mat-option>
+                    <ng-container *ngFor="let symptom of getSymptoms(); index as i;" >
+                        <mat-option *ngIf="symptom" [value]="i">
+                            {{symptom}}
+                        </mat-option>
+                    </ng-container>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Diagnosis</mat-label>
                 <mat-select [(ngModel)]="item.diagnosis" name="diagnosis" multiple>
-                    <mat-option *ngFor="let disease of getDiseases(); index as i;" [value]="i">
-                        {{disease}}
-                    </mat-option>
+                    <ng-container *ngFor="let disease of getDiseases(); index as i;" >
+                        <mat-option *ngIf="disease" [value]="i">
+                            {{disease}}
+                        </mat-option>
+                    </ng-container>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
@@ -43,6 +49,6 @@
         </form>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button mat-button color="primary" (click)="submit()">Save & Open</button>
+        <button mat-button color="primary" (click)="submit()">Save</button>
     </mat-card-actions>
 </mat-card>

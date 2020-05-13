@@ -19,6 +19,7 @@ export class PersonnelListComponent implements AfterViewInit {
     doctorsDisplayedColumns = ['id', 'firstname', 'lastname', 'salary', 'totalSalary'];
     accountsDisplayedColumns = ['id', 'username', 'email'];
     salaries: number[] = [];
+    private unsetLoading: () => void;
 
     constructor (private personnelService: PersonnelService, private loadingService: LoadingService, private authService: AuthService, private salaryService: SalaryService) {}
 
@@ -30,8 +31,12 @@ export class PersonnelListComponent implements AfterViewInit {
     }
 
     public calculateSalary (doctorId: number) {
+        this.unsetLoading = this.loadingService.setLoading();
         this.salaryService.calculateSalary(doctorId).subscribe((salary) => {
+            this.unsetLoading();
             this.salaries[doctorId] = salary;
+        }, (error) => {
+            this.unsetLoading();
         });
     }
 

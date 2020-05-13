@@ -62,3 +62,8 @@ export interface InteractionWithPatient extends Interaction {
         id: number;
     }
 }
+
+export interface CureForDisease {
+    cure: string;
+    disease: number;
+}

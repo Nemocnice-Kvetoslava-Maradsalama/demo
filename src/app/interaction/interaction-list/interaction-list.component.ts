@@ -43,7 +43,7 @@ export class InteractionListComponent implements AfterViewInit {
         return symptoms.map((symptomId) => this.foreignMappingService.getSymptomById(symptomId)).join(', ');
     }
 
-    public getForeignDrugs (prescriptions: number[]) {
+    public getForeignDrugs (prescriptions: string[]) {
         return prescriptions.map((prescriptionId) => this.foreignMappingService.getDrugById(prescriptionId)).join(', ');
     }
 

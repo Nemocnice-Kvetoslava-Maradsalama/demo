@@ -117,7 +117,7 @@ export class ForeignMappingService {
     this.symptoms[symptom.id] = symptom.name;
   }
 
-  public getDrugById (drugId: number): string {
+  public getDrugById (drugId: string): string {
     if (this.drugs == null) {
       this.drugs = {};
       this.fetchDrugs();
@@ -133,7 +133,6 @@ export class ForeignMappingService {
       } else {
         this.addDrug(drugs);
       }
-      console.log(this.drugs);
     });
   }
 

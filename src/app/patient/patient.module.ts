@@ -6,6 +6,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InteractionModule } from '../interaction/interaction.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [PatientListComponent],
@@ -13,6 +14,7 @@ import { InteractionModule } from '../interaction/interaction.module';
     CommonModule,
     MatTableModule,
     MatSortModule,
+    MatButtonModule,
     HttpClientModule,
     AppRoutingModule,
     InteractionModule,

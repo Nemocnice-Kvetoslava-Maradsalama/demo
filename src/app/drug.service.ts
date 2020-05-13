@@ -8,12 +8,7 @@ import { Patient, Drug } from 'src/app/types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-};
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,24 +16,19 @@ const httpOptions = {
 export class DrugService {
   private url: string = environment.serviceUrls.drugs;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  /*public addDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.post<Doctor>(this.url + '/doctors', doctor, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+  private getHttpOptions () {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        //'Authorization': 'Bearer ' + this.authService.getToken()
+      })
+    };
   }
 
-  public getDoctors(): Observable<Doctor | Doctor[]> {
-    return this.http.get<Doctor>(this.url + '/doctors', httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }*/
-
   public getDrugs(): Observable<Drug | Drug[]> {
-    return this.http.get<Drug>(this.url + '/drug', httpOptions)
+    return this.http.get<Drug>(this.url + '/drug', this.getHttpOptions())
       .pipe(
         catchError(this.handleError)
       );
